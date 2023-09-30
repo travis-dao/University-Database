@@ -7,7 +7,7 @@ var init = false;
 
 function displayInfo(event) {
     event.preventDefault();
-    fetch('http://uni-database.herokuapp.com/api/database', {
+    fetch('http://127.0.0.1:5000/api/database', {
         method: 'POST',
         body: new FormData(document.getElementById('database-form'))
     })

@@ -41,7 +41,8 @@ input::-webkit-inner-spin-button {
     border: none;
     background-color: transparent;
     display: inline;
-    margin: 0 0.5em;
+    margin: 0 5px;
+    padding: 5px 20px;
 }
 
 .nav-bar form:first-of-type {
@@ -52,13 +53,14 @@ input::-webkit-inner-spin-button {
     color: var(--black-light);
 }
 
-#current-page {
-    background-color: var(--secondary);
+#current-page button {
+    background-color: var(--accent);
+    color: var(--white);
     border-radius: 10px;
 }
 
 #current-page button:hover {
-    color: var(--white);
+    color: var(--primary);
 }
 
 /* ----------------------- homepage ----------------------- */
