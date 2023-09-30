@@ -52,6 +52,7 @@ class UniversityData:
         self.file.fillna('n/a', inplace=True) # replace NULL with 'n/a'
         self.reference_dict = self.file.to_dict(orient='list') # dict[list]
         length = len(self.reference_dict['INSTNM'])
+        print(length)
 
         ref = Reference()
         self.states_count_dict = ref.states_count_dict
@@ -98,5 +99,5 @@ class UniversityData:
                 name_to_return = keys
         return name_to_return
     
-'''data = UniversityData()
-print(data.return_data(data.find_name_match('yale')))'''
+data = UniversityData()
+#print(data.return_data(data.find_name_match('yale')))
