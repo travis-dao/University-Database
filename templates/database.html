@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <!--<link rel="stylesheet" href="styles.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Database</title>
+    <div class="nav-bar">
+        <form action="{{ url_for('home') }}" method="post">
+            <button type="submit">Home</button>
+        </form>
+        <form id="current-page" action="{{ url_for('database') }}" method="post">
+            <button type="submit">Database</button>
+        </form>
+        <form action="{{ url_for('filter') }}" method="post">
+            <button type="submit">Map</button>
+        </form>
+    </div>
+</header>
+<body id="gradient">
+    <h1 class="title">Database</h1>
+    <form id="database-form" class="form" action="{{ url_for('database') }}" method="post" autocomplete="off">
+        <div class="searchbar-wrapper">
+            <input type="text" placeholder="Enter school name (be specific)" name="input" required>
+        </div>
+    </form>
+    <div class="display">
+        <div class="div" id="basic-info">
+            <h2><a id="name" target="_blank">School Name</a></h2>
+            <p id="location">City, State (Geographic Region)</p>
+            <p id="local-pop-size">Local Population Size</p>
+            <p id="cc-basic">Carnegie Classification - Basic</p>
+            <p id="cc-size">Carnegie Classification - Size</p>
+            <p id="religion">Religious Affiliation</p>
+            <p id="undergrad-size">Undergrad Size</p>
+        </div>
+        <hr>
+        <div class="div">
+            <canvas id="program-chart"></canvas>
+        </div>
+        <hr>
+        <div class="div">
+            <canvas id="ethnic-chart"></canvas>
+        </div>
+        <hr>
+        <div class="div" id="statistics">
+            <h2>Statistics</h2>
+            <p id="adm-rate-display">Admissions Rate</p>
+            <div class="test-scores">
+                <div class="test-column">
+                    <h3>SAT</h3>
+                    <div>
+                        <p>Reading 25%</p>
+                        <p class="important">Reading 50%</p>
+                        <p>Reading 75%</p>
+                        <p>Math 25%</p>
+                        <p class="important">Math 50%</p>
+                        <p>Math 75%</p>
+                        <p>Writing 25%</p>
+                        <p class="important">Writing 50%</p>
+                        <p>Writing 75%</p>
+                        <p class="important">Average</p>
+                        <p class="empty">_</p>
+                        <p class="empty">_</p>
+                    </div>
+                    <div>
+                        <p id="sat-vr-25">0</p>
+                        <p class="important" id="sat-vr-mid">0</p>
+                        <p id="sat-vr-75">0</p>
+                        <p id="sat-mt-25">0</p>
+                        <p class="important" id="sat-mt-mid">0</p>
+                        <p id="sat-mt-75">0</p>
+                        <p id="sat-wr-25">0</p>
+                        <p class="important" id="sat-wr-mid">0</p>
+                        <p id="sat-wr-75">0</p>
+                        <p class="important" id="sat-avg">0</p>
+                        <p class="empty">_</p>
+                        <p class="empty">_</p>
+                    </div>
+                </div>
+                <div class="test-column">
+                    <h3>ACT</h3>
+                    <div>
+                        <p>English 25%</p>
+                        <p class="important">English 50%</p>
+                        <p>English 75%</p>
+                        <p>Math 25%</p>
+                        <p class="important">Math 50%</p>
+                        <p>Math 75%</p>
+                        <p>Writing 25%</p>
+                        <p class="important">Writing 50%</p>
+                        <p>Writing 75%</p>
+                        <p>Cumulative 25%</p>
+                        <p class="important">Cumulative 50%</p>
+                        <p>Cumulative 75%</p>
+                    </div>
+                    <div>
+                        <p id="act-en-25">0</p>
+                        <p class="important" id="act-en-mid">0</p>
+                        <p id="act-en-75">0</p>
+                        <p id="act-mt-25">0</p>
+                        <p class="important" id="act-mt-mid">0</p>
+                        <p id="act-mt-75">0</p>
+                        <p id="act-wr-25">0</p>
+                        <p class="important" id="act-wr-mid">0</p>
+                        <p id="act-wr-75">0</p>
+                        <p id="act-cm-25">0</p>
+                        <p class="important" id="act-cm-mid">0</p>
+                        <p id="act-cm-75">0</p>
+                    </div>
+                </div>
+            </div>
+            <p class="note">Note: some schools are test-optional, meaning the data refers to only submitted scores.</p>
+        </div>
+        <hr>
+        <div class="div" id="pricing">
+            <h2>Pricing</h2>
+            <div>
+                <p class="important">Avg Net $</p>
+                <p>Avg Net $ for $0-$48,000 family income</p>
+                <p>Avg Net $ for $0-$30,000 family income</p>
+                <p>Avg Net $ for $30,001-$48,000 family income</p>
+                <p>Avg Net $ for $30,001-$75,000 family income</p>
+                <p>Avg Net $ for $48,001-$75,000 family income</p>
+                <p>Avg Net $ for $75,001-$110,000 family income</p>
+                <p>Avg Net $ for $75,000+ family income</p>
+                <p>Avg Net $ for $110,000+ family income</p>
+                <p class="important">Avg $ of attendance</p>
+                <p class="important">In-state tuition and fees</p>
+                <p class="important">Out-of-state tuition and fees</p>
+                <p>Undegrad % that got federal loan</p>
+                <p>$ of attendance: estimated books and supplies</p>
+                <p>$ of attendance: on-campus room and board</p>
+                <p>$ of attendance: on-campus other expenses</p>
+                <p>$ of attendance: off-campus room and board</p>
+                <p>$ of attendance: off-campus other expenses</p>
+                <p>$ of attendance: with-family other expenses</p>  
+            </div>
+            <div>
+                <p class="important" id="Avg Net $">0</p>
+                <p id="Avg Net $ for $0-$48,000 family income">0</p>
+                <p id="Avg Net $ for $0-$30,000 family income">0</p>
+                <p id="Avg Net $ for $30,001-$48,000 family income">0</p>
+                <p id="Avg Net $ for $30,001-$75,000 family income">0</p>
+                <p id="Avg Net $ for $48,001-$75,000 family income">0</p>
+                <p id="Avg Net $ for $75,001-$110,000 family income">0</p>
+                <p id="Avg Net $ for $75,000+ family income">0</p>
+                <p id="Avg Net $ for $110,000+ family income">0</p>
+                <p class="important" id="Avg $ of attendance">0</p>
+                <p class="important" id="In-state tuition and fees">0</p>
+                <p class="important" id="Out-of-state tuition and fees">0</p>
+                <p id="Undegrad % that got federal loan">0</p>
+                <p id="$ of attendance: estimated books and supplies">0</p>
+                <p id="$ of attendance: on-campus room and board">0</p>
+                <p id="$ of attendance: on-campus other expenses">0</p>
+                <p id="$ of attendance: off-campus room and board">0</p>
+                <p id="$ of attendance: off-campus other expenses">0</p>
+                <p id="$ of attendance: with-family other expenses">0</p>  
+            </div>  
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='database.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</body>
+</html>
