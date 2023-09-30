@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from unidata import UniversityData
 
-HOME = 'home.html'
+HOME = 'index.html'
 DATABASE = 'database.html'
 FILTER = 'filter.html'
 
