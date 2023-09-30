@@ -50,7 +50,7 @@ class School:
 class UniversityData:
     def __init__(self):
         # process file
-        self.file = pd.read_csv('files\MERGED2021_22_PP.csv', dtype='str') # read file
+        self.file = pd.read_csv('files\\MERGED2021_22_PP.csv', dtype='str') # read file
         self.file.fillna('n/a', inplace=True) # replace NULL with 'n/a'
         self.reference_dict = self.file.to_dict(orient='list') # dict[list]
         length = len(self.reference_dict[INSTITUTION_NAME])
