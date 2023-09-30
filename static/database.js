@@ -7,7 +7,7 @@ var init = false;
 
 function displayInfo(event) {
     event.preventDefault();
-    fetch('http://127.0.0.1:5000/api/database', {
+    fetch('https://university-database-roan.vercel.app/api/database', {
         method: 'POST',
         body: new FormData(document.getElementById('database-form'))
     })
