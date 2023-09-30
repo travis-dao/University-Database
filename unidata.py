@@ -2,8 +2,6 @@ import pandas as pd
 from reference import Reference
 from thefuzz import fuzz
 
-INSTITUTION_NAME = 'INSTNM'
-
 class School:
     def __init__(self, reference_dict, index, necessary_headers):
         # create a local dict[list] with keys as headers
@@ -11,7 +9,7 @@ class School:
         for header in necessary_headers:
             data[header] = reference_dict[header][index]
         self.data = data
-        self.name = data[INSTITUTION_NAME]
+        self.name = data['INSTNM']
         url = self.data['INSTURL']
         if url.startswith('www.'):
             self.data['INSTURL'] = 'https://' + url
