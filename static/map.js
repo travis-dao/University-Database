@@ -10,7 +10,7 @@ map.addLayer(layer);
 window.onload = function plotPoints(event) {
     event.preventDefault();
 
-    fetch('http://127.0.0.1:5000/api/filter', {
+    fetch('http://university-database.herokuapp.com/api/filter', {
         method: 'POST'
     })
         .then(response => response.json())
