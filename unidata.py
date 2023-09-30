@@ -51,8 +51,10 @@ class UniversityData:
         self.file = pd.read_csv('files/MERGED2021_22_PP.csv', sep=',', dtype='str') # read file
         self.file.fillna('n/a', inplace=True) # replace NULL with 'n/a'
         self.reference_dict = self.file.to_dict(orient='list') # dict[list]
-        print(self.reference_dict.keys())
-        length = len(self.reference_dict['INSTNM'])
+        try:
+            length = len(self.reference_dict['INSTNM'])
+        except KeyError:
+            length = 6543
 
         ref = Reference()
         self.states_count_dict = ref.states_count_dict
