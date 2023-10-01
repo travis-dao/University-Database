@@ -19,15 +19,16 @@ class UniversityData:
             return
 
         # process file
+        ref = Reference()
         df_1 = pd.read_csv('files/file_0.csv', dtype='str')
         df_2 = pd.read_csv('files/file_1.csv', dtype='str')
         df = pd.concat([df_1, df_2])
+        df = df.filter(ref.all_dict_headers)
         df.fillna('n/a', inplace=True) # replace NULL with 'n/a'
         unfiltered_data = df.to_dict(orient='list') # dict[list]
         length = len(unfiltered_data['INSTNM'])
-        print(length)
+        #print(length)
 
-        ref = Reference()
         self.states_count_dict = ref.states_count_dict
         for index in range(length):
             instance = self.return_data_instance(unfiltered_data, index, ref.all_dict_headers)
@@ -45,7 +46,7 @@ class UniversityData:
             self.schools[instance['INSTNM']] = self.apply_filters(instance, ref.value_filters, ref.key_filters)
         self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
 
-        print(len(self.schools.keys()))
+        #print(len(self.schools.keys()))
         with open('data.json', 'w') as f:
             json.dump(self.schools, f)
 
