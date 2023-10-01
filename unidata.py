@@ -2,89 +2,54 @@ import pandas as pd
 import numpy as np
 from reference import Reference
 from thefuzz import fuzz
+import json
 
-class School:
-    def __init__(self, reference_dict, index, necessary_headers):
-        # create a local dict[list] with keys as headers
-        self.data = {}
-        for header in necessary_headers:
-            self.data[header] = reference_dict[header][index]
-        self.name = self.data['INSTNM']
-        url = self.data['INSTURL']
-        if url.startswith('www.'):
-            self.data['INSTURL'] = 'https://' + url
-
-    def apply_filters(self, value_filters, key_filters):
-        # filter values
-        filter_names = list(value_filters.keys())
-        for name in filter_names:
-            try:
-                self.data[name] = value_filters[name][self.data[name]]
-            except:
-                self.data[name] = 'n/a'    
-        # filter keys
-        self.data = {key_filters[k]: v for k, v in self.data.items()}
-        return self
-        
-    
-    def print_info(self):
-        # print data into console
-        for k, v in self.data.items():
-            print(f'{k}: {v}')
-        return self
-
-    def compress_to_string(self):
-        # compress print_info in 1 string
-        string = ''
-        for k, v in self.data.items():
-            string += f'{k}: {v}\n'
-        return string
-    
-    def return_location(self):
-        # return lat and lon for map data
-        return_data = [self.data['LATITUDE'], self.data['LONGITUDE']]
-        return return_data
+SETUP = True
 
 class UniversityData:
     def __init__(self):
+        self.schools = {}
+        self.map_data = {}
+        if SETUP:
+            with open('data.json') as f:
+                self.schools = json.load(f)
+                for key, school in self.schools.items():
+                    self.map_data[key] = [school['LATITUDE'], school['LONGITUDE']]
+                    self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
+            return
+
         # process file
         df_1 = pd.read_csv('files/file_0.csv', dtype='str')
         df_2 = pd.read_csv('files/file_1.csv', dtype='str')
         df = pd.concat([df_1, df_2])
         df.fillna('n/a', inplace=True) # replace NULL with 'n/a'
-        reference_dict = df.to_dict(orient='list') # dict[list]
-        length = len(reference_dict['INSTNM'])
+        unfiltered_data = df.to_dict(orient='list') # dict[list]
+        length = len(unfiltered_data['INSTNM'])
+        print(length)
 
         ref = Reference()
         self.states_count_dict = ref.states_count_dict
-
-        # dict: {school name: School (class)}
-        self.schools = {}
         for index in range(length):
-            instance = School(reference_dict, index, ref.all_dict_headers)
+            instance = self.return_data(unfiltered_data, index, ref.all_dict_headers)
 
-            if instance.data['NPT4_PUB'] == 'n/a':
-                instance.data = {k: v for k, v in instance.data.items() if 'PUB' not in k}
+            if instance['NPT4_PUB'] == 'n/a':
+                instance = {k: v for k, v in instance.items() if 'PUB' not in k}
             else:
-                instance.data = {k: v for k, v in instance.data.items() if 'PRIV' not in k}
-            if instance.data['COSTT4_A'] == 'n/a':
-                del instance.data['COSTT4_A']
+                instance = {k: v for k, v in instance.items() if 'PRIV' not in k}
+            if instance['COSTT4_A'] == 'n/a':
+                del instance['COSTT4_A']
             else:
-                del instance.data['COSTT4_P']
+                del instance['COSTT4_P']
 
-            instance.apply_filters(ref.value_filters, ref.key_filters)
-            self.schools[instance.name] = instance
-        
-        self.map_data = {}
-        for name, school in self.schools.items():
-            self.map_data[name] = school.return_location()
+            self.map_data[instance['INSTNM']] = [instance['LATITUDE'], instance['LONGITUDE']]
+            self.schools[instance['INSTNM']] = self.apply_filters(instance, ref.value_filters, ref.key_filters)
         self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
 
-    def return_data_string(self, name_input):
-        return self.schools[name_input].compress_to_string()
-    
+        with open('data.json', 'w') as f:
+            json.dump(self.schools, f)
+
     def return_data(self, name_input):
-        return self.schools[name_input].data
+        return self.schools[name_input]
     
     def return_map_data(self):
         return self.map_data
@@ -100,7 +65,27 @@ class UniversityData:
                 name_to_return = keys
         return name_to_return
     
-data = UniversityData()
+    def return_data(self, unfiltered_data, index, necessary_headers):
+        data = {}
+        for header in necessary_headers:
+            data[header] = unfiltered_data[header][index]
+        url = data['INSTURL']
+        if url.startswith('www.'):
+            data['INSTURL'] = 'https://' + url
+        return data
+
+    def apply_filters(self, data, value_filters, key_filters):
+        filter_names = list(value_filters.keys())
+        for name in filter_names:
+            try:
+                data[name] = value_filters[name][data[name]]
+            except:
+                data[name] = 'n/a'    
+        # filter keys
+        data = {key_filters[k]: v for k, v in data.items()}
+        return data
+    
+#data = UniversityData()
 #print(data.return_data(data.find_name_match('yale')))
 
 def split_df(path):
