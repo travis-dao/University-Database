@@ -50,7 +50,7 @@ class UniversityData:
         df = pd.read_csv('files/MERGED2021_22_PP.csv', sep=',', dtype='str') # read file
         df.fillna('n/a', inplace=True) # replace NULL with 'n/a'
         self.reference_dict = df.to_dict(orient='list') # dict[list]
-        print(self.reference_dict.keys())
+        print(self.reference_dict)
         length = len(self.reference_dict['UNITID'])
 
         ref = Reference()
