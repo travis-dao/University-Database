@@ -101,5 +101,5 @@ class UniversityData:
                 name_to_return = keys
         return name_to_return
     
-data = UniversityData()
+#data = UniversityData()
 #print(data.return_data(data.find_name_match('yale')))
