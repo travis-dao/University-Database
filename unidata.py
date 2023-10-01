@@ -48,11 +48,12 @@ class School:
 class UniversityData:
     def __init__(self):
         # process file
-        df = pd.read_csv('files/MERGED2021_22_PP.csv', dtype='str') # read file
+        df_1 = pd.read_csv('files/file_0.csv', dtype='str')
+        df_2 = pd.read_csv('files/file_1.csv', dtype='str')
+        df = pd.concat([df_1, df_2])
         df.fillna('n/a', inplace=True) # replace NULL with 'n/a'
-        self.reference_dict = df.to_dict(orient='list') # dict[list]
-        print(self.reference_dict)
-        length = len(self.reference_dict['UNITID'])
+        reference_dict = df.to_dict(orient='list') # dict[list]
+        length = len(reference_dict['INSTNM'])
 
         ref = Reference()
         self.states_count_dict = ref.states_count_dict
@@ -60,7 +61,7 @@ class UniversityData:
         # dict: {school name: School (class)}
         self.schools = {}
         for index in range(length):
-            instance = School(self.reference_dict, index, ref.all_dict_headers)
+            instance = School(reference_dict, index, ref.all_dict_headers)
 
             if instance.data['NPT4_PUB'] == 'n/a':
                 instance.data = {k: v for k, v in instance.data.items() if 'PUB' not in k}
@@ -99,7 +100,7 @@ class UniversityData:
                 name_to_return = keys
         return name_to_return
     
-#data = UniversityData()
+data = UniversityData()
 #print(data.return_data(data.find_name_match('yale')))
 
 def split_df(path):
@@ -108,4 +109,4 @@ def split_df(path):
 
     for i, chunk in enumerate(df_split):
         chunk.to_csv(f'file_{i}.csv', index=False)
-split_df('files/MERGED2021_22_PP.csv')
+#split_df('files/MERGED2021_22_PP.csv')
