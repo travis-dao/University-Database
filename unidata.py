@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from reference import Reference
 from thefuzz import fuzz
 
@@ -47,7 +48,7 @@ class School:
 class UniversityData:
     def __init__(self):
         # process file
-        df = pd.read_csv('files/MERGED2021_22_PP.csv', sep=',', dtype='str') # read file
+        df = pd.read_csv('files/MERGED2021_22_PP.csv', dtype='str') # read file
         df.fillna('n/a', inplace=True) # replace NULL with 'n/a'
         self.reference_dict = df.to_dict(orient='list') # dict[list]
         print(self.reference_dict)
@@ -100,3 +101,11 @@ class UniversityData:
     
 #data = UniversityData()
 #print(data.return_data(data.find_name_match('yale')))
+
+def split_df(path):
+    df = pd.read_csv(path, dtype='str')
+    df_split = np.array_split(df, 2)
+
+    for i, chunk in enumerate(df_split):
+        chunk.to_csv(f'file_{i}.csv', index=False)
+split_df('files/MERGED2021_22_PP.csv')
