@@ -30,7 +30,7 @@ class UniversityData:
         ref = Reference()
         self.states_count_dict = ref.states_count_dict
         for index in range(length):
-            instance = self.return_data(unfiltered_data, index, ref.all_dict_headers)
+            instance = self.return_data_instance(unfiltered_data, index, ref.all_dict_headers)
 
             if instance['NPT4_PUB'] == 'n/a':
                 instance = {k: v for k, v in instance.items() if 'PUB' not in k}
@@ -65,7 +65,7 @@ class UniversityData:
                 name_to_return = keys
         return name_to_return
     
-    def return_data(self, unfiltered_data, index, necessary_headers):
+    def return_data_instance(self, unfiltered_data, index, necessary_headers):
         data = {}
         for header in necessary_headers:
             data[header] = unfiltered_data[header][index]
