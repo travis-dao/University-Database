@@ -5,11 +5,10 @@ from thefuzz import fuzz
 class School:
     def __init__(self, reference_dict, index, necessary_headers):
         # create a local dict[list] with keys as headers
-        data = {}
+        self.data = {}
         for header in necessary_headers:
-            data[header] = reference_dict[header][index]
-        self.data = data
-        self.name = data['INSTNM']
+            self.data[header] = reference_dict[header][index]
+        self.name = self.data['INSTNM']
         url = self.data['INSTURL']
         if url.startswith('www.'):
             self.data['INSTURL'] = 'https://' + url
