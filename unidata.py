@@ -45,6 +45,7 @@ class UniversityData:
             self.schools[instance['INSTNM']] = self.apply_filters(instance, ref.value_filters, ref.key_filters)
         self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
 
+        print(len(self.schools.keys()))
         with open('data.json', 'w') as f:
             json.dump(self.schools, f)
 
@@ -86,7 +87,7 @@ class UniversityData:
         return data
     
 #data = UniversityData()
-#print(data.return_data(data.find_name_match('yale')))
+#print(data.return_data(data.find_name_match('Stanford University')))
 
 def split_df(path):
     df = pd.read_csv(path, dtype='str')
