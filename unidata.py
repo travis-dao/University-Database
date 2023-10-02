@@ -86,8 +86,8 @@ class UniversityData:
         data = {key_filters[k]: v for k, v in data.items()}
         return data
     
-data = UniversityData()
-print(data.return_data(data.find_name_match('Stanford University')))
+#data = UniversityData()
+#print(data.return_data(data.find_name_match('Stanford University')))
 
 def split_df(path):
     df = pd.read_csv(path, dtype='str')
