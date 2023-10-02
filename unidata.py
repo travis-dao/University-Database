@@ -8,6 +8,7 @@ SETUP = True
 
 class UniversityData:
     def __init__(self):
+        ref = Reference()
         self.schools = {}
         self.map_data = {}
         if SETUP:
@@ -16,10 +17,10 @@ class UniversityData:
                 for key, school in self.schools.items():
                     self.map_data[key] = [school['LATITUDE'], school['LONGITUDE']]
                     self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
+                    school = self.apply_filters(school, ref.value_filters, ref.key_filters)
             return
 
         # process file
-        ref = Reference()
         df_1 = pd.read_csv('files/file_0.csv', dtype='str')
         df_2 = pd.read_csv('files/file_1.csv', dtype='str')
         df = pd.concat([df_1, df_2])
@@ -42,9 +43,7 @@ class UniversityData:
             else:
                 del instance['COSTT4_P']
 
-            self.map_data[instance['INSTNM']] = [instance['LATITUDE'], instance['LONGITUDE']]
-            self.schools[instance['INSTNM']] = self.apply_filters(instance, ref.value_filters, ref.key_filters)
-        self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
+            self.schools[instance['INSTNM']] = instance
 
         #print(len(self.schools.keys()))
         with open('data.json', 'w') as f:
