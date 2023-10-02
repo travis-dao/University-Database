@@ -14,10 +14,10 @@ class UniversityData:
         if SETUP:
             with open('data.json') as f:
                 self.schools = json.load(f)
-                for key, school in self.schools.items():
-                    self.map_data[key] = [school['LATITUDE'], school['LONGITUDE']]
+                for name, school in self.schools.items():
+                    self.map_data[name] = [school['LATITUDE'], school['LONGITUDE']]
                     self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
-                    school = self.apply_filters(school, ref.value_filters, ref.key_filters)
+                    self.schools[name] = self.apply_filters(school, ref.value_filters, ref.key_filters)
             return
 
         # process file
@@ -86,8 +86,8 @@ class UniversityData:
         data = {key_filters[k]: v for k, v in data.items()}
         return data
     
-#data = UniversityData()
-#print(data.return_data(data.find_name_match('Stanford University')))
+data = UniversityData()
+print(data.return_data(data.find_name_match('Stanford University')))
 
 def split_df(path):
     df = pd.read_csv(path, dtype='str')
