@@ -173,7 +173,7 @@ hr {
 }
 
 #basic-info{
-   min-height: 330px;
+   min-height: fit-content;
 }
 
 h2 {
