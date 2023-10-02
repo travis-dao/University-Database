@@ -7,7 +7,7 @@ var init = false;
 
 function displayInfo(event) {
     event.preventDefault();
-    fetch('https://university-database-roan.vercel.app/api/database', {
+    fetch('https://university-database-git-main-travis-daos-projects.vercel.app/api/database', {
         method: 'POST',
         body: new FormData(document.getElementById('database-form'))
     })
