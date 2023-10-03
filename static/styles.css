@@ -229,15 +229,23 @@ h3 {
     overflow: hidden;
 }
 
-.test-column > div, #pricing > div{
-    width: 49%;
+.test-column div:first-of-type, #pricing div:first-of-type{
+    min-width: 70%;
+    float: left;
+    margin-left: 10%;
+    text-align: start;
+}
+
+.test-column div {
+    min-width: auto;
     float: left;
 }
 
 .test-column p, #pricing p {
-    width: 70%;
-    margin-left: 5%;
+    width: auto;
+    margin-left: 0;
     text-align: start;
+    margin-right: 10%;
     font-size: 1.25em;
 }
 
