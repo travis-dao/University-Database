@@ -28,16 +28,16 @@ input::-webkit-inner-spin-button {
 /* ----------------------- navigation bars ----------------------- */
 .nav-bar {
     align-items: center;
-    margin: none;
+    margin: 0;
     padding: 10px 0px;
     background-color: var(--white);
     width: 100%;
-    height: 40px;
+    height: auto;
     display: flex;
 }
 
 .nav-bar button {
-    font-size: 30px;
+    font-size: 2em;
     border: none;
     background-color: transparent;
     display: inline;
@@ -46,7 +46,7 @@ input::-webkit-inner-spin-button {
 }
 
 .nav-bar form:first-of-type {
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .nav-bar button:hover {
@@ -130,6 +130,7 @@ a {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: var(--white);
     border-radius: 10px;
 }
@@ -265,7 +266,7 @@ h3 {
     font-size: 0.75em;
 }
 
-/* ----------------------- filter ----------------------- */
+/* ----------------------- map ----------------------- */
 #map-container {
     display: flex;
     align-items: center;
@@ -279,7 +280,7 @@ h3 {
 }
 
 #map {
-    width: 96.5%;
+    width: 97%;
     height: 95%;
     margin: auto;
     border-radius: 20px;
@@ -316,4 +317,116 @@ body {
 .title {
     font-size: 5em;
     text-align: center;
+}
+
+@media (width <= 650px) {
+    body {
+        padding-bottom: 0;
+    }
+    
+    .nav-bar {
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav-bar form:first-of-type {
+        margin-left: 0;
+    }
+
+    .nav-bar button {
+        font-size: 1.25em;
+    }
+
+    .title {
+        font-size: 3em;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    #about {
+        padding: 30px 0;
+    }
+
+    #about p {
+        font-size: 1em;
+    }
+
+    #home {
+        margin-top: 100px;
+        margin-bottom:200px;
+    }
+    
+    .form {
+        width: 70%;
+        height: 40px;
+    }
+    
+    .searchbar-wrapper input {
+        font-size: 0.8em;
+    }
+    
+    .display {
+        margin: 30px auto;
+    }
+    
+    .div {
+        margin: 5px auto;
+        padding: 5px;
+    }
+    
+    hr {
+        height: 2px;
+    }
+    
+    h2 {
+        font-size: 1.35em;
+        margin-bottom: 3px;
+        margin-top: 10px;
+    }
+    
+    #basic-info p:first-of-type,  #adm-rate-display {
+        font-size: 0.8em;
+        margin-bottom: 10px;
+    }
+
+    #basic-info p {
+        font-size: 1em;
+    }
+    
+    .test-scores {
+        column-gap: 10px;
+    }
+    
+    h3 {
+        font-size: 1.25em;
+        margin-bottom: 3px;
+    }
+    
+    .test-column div {
+        min-width: auto;
+        float: left;
+    }
+    
+    .test-column p, #pricing p {
+        margin-right: 5%;
+        font-size: 0.8em;
+    }
+    
+    .note {
+        font-size: 0.6em;
+    }
+
+    #map-container {
+        margin-bottom: 15px;
+        padding: 3px;
+        border-radius: 30px;
+    }
+    
+    #map {
+        width: 97%;
+        height: 97%;
+        border: 1px solid var(--accent);
+    }
 }
