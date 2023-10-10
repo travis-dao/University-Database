@@ -194,6 +194,12 @@ a {
     font-size: 1.5em;
     margin-bottom: 20px;
 }
+
+#adm-rate-display {
+    font-weight: bold;
+    color: var(--secondary);
+}
+
 #basic-info p {
     text-align: center;
     margin: auto;
@@ -213,40 +219,31 @@ a {
 h3 {
     font-size: 1.75em;
     margin-bottom: 5px;
+    display: block;
 }
 
 .test-column {
     text-align: center;
-    width: 80%;
+    width: 100%;
     margin: auto;
     border: 1px solid var(--accent);
     border-radius: 15px;
-    overflow: hidden;
 }
 
 #pricing {
     width: 85%;
     margin: auto;
-    overflow: hidden;
 }
 
-.test-column div:first-of-type, #pricing div:first-of-type{
-    min-width: 70%;
-    float: left;
-    margin-left: 10%;
+.stat-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+.stat-container p, #pricing p {
     text-align: start;
-}
-
-.test-column div {
-    min-width: auto;
-    float: left;
-}
-
-.test-column p, #pricing p {
-    width: auto;
-    margin-left: 0;
-    text-align: start;
-    margin-right: 10%;
+    margin: 1em;
     font-size: 1.25em;
 }
 
@@ -320,7 +317,7 @@ body {
 }
 
 /* ----------------------- Mobile ----------------------- */
-@media (width <= 650px) {
+@media only screen and (max-width: 768px) {
     body {
         padding-bottom: 0;
     }
@@ -396,22 +393,12 @@ body {
         font-size: 1em;
     }
     
-    .test-scores {
-        column-gap: 10px;
-    }
-    
     h3 {
         font-size: 1.25em;
         margin-bottom: 3px;
     }
     
-    .test-column div {
-        min-width: auto;
-        float: left;
-    }
-    
     .test-column p, #pricing p {
-        margin-right: 5%;
         font-size: 0.8em;
     }
     

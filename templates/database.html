@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--<link rel="stylesheet" href="styles.css">-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>University Database</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="styles.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <header>
-    <title>University Database</title>
     <div class="nav-bar">
         <form action="{{ url_for('home') }}" method="post">
             <button type="submit">Home</button>
@@ -52,64 +52,68 @@
             <div class="test-scores">
                 <div class="test-column">
                     <h3>SAT</h3>
-                    <div>
-                        <p>Reading 25%</p>
-                        <p class="important">Reading 50%</p>
-                        <p>Reading 75%</p>
-                        <p>Math 25%</p>
-                        <p class="important">Math 50%</p>
-                        <p>Math 75%</p>
-                        <p>Writing 25%</p>
-                        <p class="important">Writing 50%</p>
-                        <p>Writing 75%</p>
-                        <p class="important">Average</p>
-                        <p class="empty">_</p>
-                        <p class="empty">_</p>
-                    </div>
-                    <div>
-                        <p id="sat-vr-25">0</p>
-                        <p class="important" id="sat-vr-mid">0</p>
-                        <p id="sat-vr-75">0</p>
-                        <p id="sat-mt-25">0</p>
-                        <p class="important" id="sat-mt-mid">0</p>
-                        <p id="sat-mt-75">0</p>
-                        <p id="sat-wr-25">0</p>
-                        <p class="important" id="sat-wr-mid">0</p>
-                        <p id="sat-wr-75">0</p>
-                        <p class="important" id="sat-avg">0</p>
-                        <p class="empty">_</p>
-                        <p class="empty">_</p>
+                    <div class="stat-container">
+                        <div>
+                            <p>Reading 25%</p>
+                            <p class="important">Reading 50%</p>
+                            <p>Reading 75%</p>
+                            <p>Math 25%</p>
+                            <p class="important">Math 50%</p>
+                            <p>Math 75%</p>
+                            <p>Writing 25%</p>
+                            <p class="important">Writing 50%</p>
+                            <p>Writing 75%</p>
+                            <p class="important">Average</p>
+                            <p class="empty">_</p>
+                            <p class="empty">_</p>
+                        </div>
+                        <div>
+                            <p id="sat-vr-25">0</p>
+                            <p class="important" id="sat-vr-mid">0</p>
+                            <p id="sat-vr-75">0</p>
+                            <p id="sat-mt-25">0</p>
+                            <p class="important" id="sat-mt-mid">0</p>
+                            <p id="sat-mt-75">0</p>
+                            <p id="sat-wr-25">0</p>
+                            <p class="important" id="sat-wr-mid">0</p>
+                            <p id="sat-wr-75">0</p>
+                            <p class="important" id="sat-avg">0</p>
+                            <p class="empty">_</p>
+                            <p class="empty">_</p>
+                        </div>
                     </div>
                 </div>
                 <div class="test-column">
                     <h3>ACT</h3>
-                    <div>
-                        <p>English 25%</p>
-                        <p class="important">English 50%</p>
-                        <p>English 75%</p>
-                        <p>Math 25%</p>
-                        <p class="important">Math 50%</p>
-                        <p>Math 75%</p>
-                        <p>Writing 25%</p>
-                        <p class="important">Writing 50%</p>
-                        <p>Writing 75%</p>
-                        <p>Cumulative 25%</p>
-                        <p class="important">Cumulative 50%</p>
-                        <p>Cumulative 75%</p>
-                    </div>
-                    <div>
-                        <p id="act-en-25">0</p>
-                        <p class="important" id="act-en-mid">0</p>
-                        <p id="act-en-75">0</p>
-                        <p id="act-mt-25">0</p>
-                        <p class="important" id="act-mt-mid">0</p>
-                        <p id="act-mt-75">0</p>
-                        <p id="act-wr-25">0</p>
-                        <p class="important" id="act-wr-mid">0</p>
-                        <p id="act-wr-75">0</p>
-                        <p id="act-cm-25">0</p>
-                        <p class="important" id="act-cm-mid">0</p>
-                        <p id="act-cm-75">0</p>
+                    <div class="stat-container">
+                        <div>
+                            <p>English 25%</p>
+                            <p class="important">English 50%</p>
+                            <p>English 75%</p>
+                            <p>Math 25%</p>
+                            <p class="important">Math 50%</p>
+                            <p>Math 75%</p>
+                            <p>Writing 25%</p>
+                            <p class="important">Writing 50%</p>
+                            <p>Writing 75%</p>
+                            <p>Cumulative 25%</p>
+                            <p class="important">Cumulative 50%</p>
+                            <p>Cumulative 75%</p>
+                        </div>
+                        <div>
+                            <p id="act-en-25">0</p>
+                            <p class="important" id="act-en-mid">0</p>
+                            <p id="act-en-75">0</p>
+                            <p id="act-mt-25">0</p>
+                            <p class="important" id="act-mt-mid">0</p>
+                            <p id="act-mt-75">0</p>
+                            <p id="act-wr-25">0</p>
+                            <p class="important" id="act-wr-mid">0</p>
+                            <p id="act-wr-75">0</p>
+                            <p id="act-cm-25">0</p>
+                            <p class="important" id="act-cm-mid">0</p>
+                            <p id="act-cm-75">0</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -118,48 +122,50 @@
         <hr>
         <div class="div" id="pricing">
             <h2>Pricing</h2>
-            <div>
-                <p class="important">Avg Net $</p>
-                <p>Avg Net $ for $0-$48,000 family income</p>
-                <p>Avg Net $ for $0-$30,000 family income</p>
-                <p>Avg Net $ for $30,001-$48,000 family income</p>
-                <p>Avg Net $ for $30,001-$75,000 family income</p>
-                <p>Avg Net $ for $48,001-$75,000 family income</p>
-                <p>Avg Net $ for $75,001-$110,000 family income</p>
-                <p>Avg Net $ for $75,000+ family income</p>
-                <p>Avg Net $ for $110,000+ family income</p>
-                <p class="important">Avg $ of attendance</p>
-                <p class="important">In-state tuition and fees</p>
-                <p class="important">Out-of-state tuition and fees</p>
-                <p>Undegrad % that got federal loan</p>
-                <p>$ of attendance: estimated books and supplies</p>
-                <p>$ of attendance: on-campus room and board</p>
-                <p>$ of attendance: on-campus other expenses</p>
-                <p>$ of attendance: off-campus room and board</p>
-                <p>$ of attendance: off-campus other expenses</p>
-                <p>$ of attendance: with-family other expenses</p>  
+            <div class="stat-container">
+                <div>
+                    <p class="important">Avg Net $</p>
+                    <p>Avg Net $ for $0-$48,000 family income</p>
+                    <p>Avg Net $ for $0-$30,000 family income</p>
+                    <p>Avg Net $ for $30,001-$48,000 family income</p>
+                    <p>Avg Net $ for $30,001-$75,000 family income</p>
+                    <p>Avg Net $ for $48,001-$75,000 family income</p>
+                    <p>Avg Net $ for $75,001-$110,000 family income</p>
+                    <p>Avg Net $ for $75,000+ family income</p>
+                    <p>Avg Net $ for $110,000+ family income</p>
+                    <p class="important">Avg $ of attendance</p>
+                    <p class="important">In-state tuition and fees</p>
+                    <p class="important">Out-of-state tuition and fees</p>
+                    <p>Undegrad % that got federal loan</p>
+                    <p>$ of attendance: estimated books and supplies</p>
+                    <p>$ of attendance: on-campus room and board</p>
+                    <p>$ of attendance: on-campus other expenses</p>
+                    <p>$ of attendance: off-campus room and board</p>
+                    <p>$ of attendance: off-campus other expenses</p>
+                    <p>$ of attendance: with-family other expenses</p>  
+                </div>
+                <div>
+                    <p class="important" id="Avg Net $">0</p>
+                    <p id="Avg Net $ for $0-$48,000 family income">0</p>
+                    <p id="Avg Net $ for $0-$30,000 family income">0</p>
+                    <p id="Avg Net $ for $30,001-$48,000 family income">0</p>
+                    <p id="Avg Net $ for $30,001-$75,000 family income">0</p>
+                    <p id="Avg Net $ for $48,001-$75,000 family income">0</p>
+                    <p id="Avg Net $ for $75,001-$110,000 family income">0</p>
+                    <p id="Avg Net $ for $75,000+ family income">0</p>
+                    <p id="Avg Net $ for $110,000+ family income">0</p>
+                    <p class="important" id="Avg $ of attendance">0</p>
+                    <p class="important" id="In-state tuition and fees">0</p>
+                    <p class="important" id="Out-of-state tuition and fees">0</p>
+                    <p id="Undegrad % that got federal loan">0</p>
+                    <p id="$ of attendance: estimated books and supplies">0</p>
+                    <p id="$ of attendance: on-campus room and board">0</p>
+                    <p id="$ of attendance: on-campus other expenses">0</p>
+                    <p id="$ of attendance: off-campus room and board">0</p>
+                    <p id="$ of attendance: off-campus other expenses">0</p>
+                    <p id="$ of attendance: with-family other expenses">0</p>  
+                </div>  
             </div>
-            <div>
-                <p class="important" id="Avg Net $">0</p>
-                <p id="Avg Net $ for $0-$48,000 family income">0</p>
-                <p id="Avg Net $ for $0-$30,000 family income">0</p>
-                <p id="Avg Net $ for $30,001-$48,000 family income">0</p>
-                <p id="Avg Net $ for $30,001-$75,000 family income">0</p>
-                <p id="Avg Net $ for $48,001-$75,000 family income">0</p>
-                <p id="Avg Net $ for $75,001-$110,000 family income">0</p>
-                <p id="Avg Net $ for $75,000+ family income">0</p>
-                <p id="Avg Net $ for $110,000+ family income">0</p>
-                <p class="important" id="Avg $ of attendance">0</p>
-                <p class="important" id="In-state tuition and fees">0</p>
-                <p class="important" id="Out-of-state tuition and fees">0</p>
-                <p id="Undegrad % that got federal loan">0</p>
-                <p id="$ of attendance: estimated books and supplies">0</p>
-                <p id="$ of attendance: on-campus room and board">0</p>
-                <p id="$ of attendance: on-campus other expenses">0</p>
-                <p id="$ of attendance: off-campus room and board">0</p>
-                <p id="$ of attendance: off-campus other expenses">0</p>
-                <p id="$ of attendance: with-family other expenses">0</p>  
-            </div>  
         </div>
     </div>
     <script src="{{ url_for('static', filename='database.js') }}"></script>
