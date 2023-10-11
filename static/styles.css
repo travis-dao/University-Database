@@ -29,7 +29,7 @@ input::-webkit-inner-spin-button {
 .nav-bar {
     align-items: center;
     margin: 0;
-    padding: 10px 0px;
+    padding: 10px 0;
     background-color: var(--white);
     width: 100%;
     height: auto;
@@ -113,7 +113,7 @@ a {
 /* ----------------------- database ----------------------- */
 #gradient {
     background-image: linear-gradient(to bottom, var(--primary), var(--secondary));
-    padding-top: 1px;
+    border-top: 1px solid var(--white);
     padding-bottom: 1px;
 }
 
@@ -236,6 +236,8 @@ h3 {
 }
 
 .stat-container {
+    display: flex;
+    flex-direction: row;
     width: 100%;
     display: grid;
     grid-template-columns: 4fr 1fr;
@@ -267,18 +269,17 @@ h3 {
 #map-container {
     display: flex;
     align-items: center;
-    width: 90%;
-    height: 100vh;
+    width: calc(90vw + 30px);
+    height: calc(90vh + 30px);
     margin: auto;
     margin-bottom: 30px;
-    padding: 5px;
     background-color: var(--white);
     border-radius: 30px;
 }
 
 #map {
-    width: 97%;
-    height: 95%;
+    width: 90vw;
+    height: 90vh;
     margin: auto;
     border-radius: 20px;
     border: 2px solid var(--accent);
@@ -305,10 +306,8 @@ html {
     background-color: var(--white);
 }
 
-body {
+body, header, html {
     margin: 0;
-    padding-bottom: 1px;
-    image-rendering: pixelated;
 }
 
 .title {
@@ -348,7 +347,7 @@ body {
     }
 
     #about p {
-        font-size: 1em;
+        font-size: 0.8em;
     }
 
     #home {
@@ -399,11 +398,11 @@ body {
     }
     
     .test-column p, #pricing p {
-        font-size: 0.8em;
+        font-size: 0.65em;
     }
     
     .note {
-        font-size: 0.6em;
+        font-size: 0.5em;
     }
 
     #map-container {
