@@ -3,7 +3,8 @@ from unidata import UniversityData
 
 HOME = 'index.html'
 DATABASE = 'database.html'
-FILTER = 'filter.html'
+REFERENCE = 'reference.html'
+MAP = 'map.html'
 
 data = UniversityData()
 
@@ -20,12 +21,16 @@ def home():
 def database():
     return render_template(DATABASE)
 
-@app.route('/filter', methods=['POST'])
-def filter():
-    return render_template(FILTER)
+@app.route('/reference', methods=['POST'])
+def reference():
+    return render_template(REFERENCE)
 
-@app.route('/api/filter', methods=['POST'])
-def filter_map():
+@app.route('/map', methods=['POST'])
+def map():
+    return render_template(MAP)
+
+@app.route('/api/map', methods=['POST'])
+def return_map():
     return jsonify(data.return_map_data())
 
 @app.route('/api/database', methods=['POST'])
@@ -34,6 +39,10 @@ def return_data():
     name_input = request.form.get("input")
     closest_name = data.find_name_match(name_input)
     return jsonify(data.return_data(closest_name))
+
+@app.route('/api/reference', methods=['POST'])
+def return_ref():
+    return data.return_schools_ref()
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -10,7 +10,7 @@ map.addLayer(layer);
 window.onload = function plotPoints(event) {
     event.preventDefault();
 
-    fetch('https://university-database-roan.vercel.app/api/filter', {
+    fetch('https://university-database-roan.vercel.app/api/map', {
         method: 'POST'
     })
         .then(response => response.json())

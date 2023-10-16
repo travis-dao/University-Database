@@ -1,10 +1,8 @@
 /* ----------------------- vars ----------------------- */
 :root {
     --black: #32292F;
-    --black-light: #32292F70;
-    --white: #F0F7F4;
+    --white: #FFFFFF;
     --primary: #C3A6E8;
-    --primary-light: #C3A6E850;
     --secondary: #259CA4;
     --accent: #2C4251;
 }
@@ -32,25 +30,32 @@ input::-webkit-inner-spin-button {
     padding: 10px 0;
     background-color: var(--white);
     width: 100%;
-    height: auto;
+    max-height: 48px;
     display: flex;
+    justify-content: space-between;
 }
 
-.nav-bar button {
-    font-size: 2em;
+#buttons {
+    display: inline;
+    width: fit-content;
+    height: fit-content;
+}
+
+#buttons form:last-of-type {
+    margin-right: 20px;
+}
+
+.nav-bar button, #buttons form {
+    display: inline;
+    font-size: 1em;
     border: none;
     background-color: transparent;
-    display: inline;
-    margin: 0 5px;
+    margin: 0;
     padding: 5px 20px;
 }
 
-.nav-bar form:first-of-type {
-    margin-left: 10px;
-}
-
-.nav-bar button:hover {
-    color: var(--black-light);
+#buttons button:hover, #logo button:hover {
+    color: var(--primary);
 }
 
 #current-page button {
@@ -61,6 +66,13 @@ input::-webkit-inner-spin-button {
 
 #current-page button:hover {
     color: var(--primary);
+}
+
+#logo button {
+    color: var(--secondary);
+    font-weight: bold;
+    font-size: 1.25em;
+    margin-left: 20px;
 }
 
 /* ----------------------- homepage ----------------------- */
@@ -243,6 +255,10 @@ h3 {
     grid-template-columns: 4fr 1fr;
 }
 
+.stat-container div {
+    float: left;
+}
+
 .stat-container p, #pricing p {
     text-align: start;
     margin: 1em;
@@ -263,6 +279,15 @@ h3 {
     margin:auto;
     margin-top: 20px;
     font-size: 0.75em;
+}
+
+/* ----------------------- reference ----------------------- */
+#reference {
+    font-size: 1em;
+    margin: 20px auto;
+    padding: 0 20px;
+    width: auto;
+    line-height: 150%;
 }
 
 /* ----------------------- map ----------------------- */
@@ -326,12 +351,18 @@ body, header, html {
         justify-content: space-evenly;
     }
 
-    .nav-bar form:first-of-type {
-        margin-left: 0;
+    .nav-bar button, #buttons form {
+        font-size: 0.8em;
+        padding: 5px;
     }
 
-    .nav-bar button {
-        font-size: 1.25em;
+    #buttons form:last-of-type {
+        margin-right: 0;
+    }
+
+    #logo button {
+        margin-left: 0;
+        font-size: 1em;
     }
 
     .title {
@@ -415,5 +446,11 @@ body, header, html {
         width: 97%;
         height: 97%;
         border: 1px solid var(--accent);
+    }
+
+    #reference {
+        font-size: 0.8em;
+        margin: 20px auto;
+        padding: 0 20px;
     }
 }

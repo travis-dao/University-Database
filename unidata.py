@@ -14,10 +14,11 @@ class UniversityData:
         if SETUP:
             with open('data.json') as f:
                 self.schools = json.load(f)
-                for name, school in self.schools.items():
-                    self.map_data[name] = [school['LATITUDE'], school['LONGITUDE']]
-                    self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
-                    self.schools[name] = self.apply_filters(school, ref.value_filters, ref.key_filters)
+            for name, school in self.schools.items():
+                self.map_data[name] = [school['LATITUDE'], school['LONGITUDE']]
+                self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
+                self.schools[name] = self.apply_filters(school, ref.value_filters, ref.key_filters)
+            self.create_schools_ref()
             return
 
         # process file
@@ -86,7 +87,18 @@ class UniversityData:
         data = {key_filters[k]: v for k, v in data.items()}
         return data
     
+    def create_schools_ref(self):
+        with open('reference.json', 'w') as f:
+            d = {}
+            d['names'] = list(self.schools.keys())
+            json.dump(d, f)
+    
+    def return_schools_ref(self):
+        with open('reference.json') as f:
+            return json.load(f)
+    
 #data = UniversityData()
+#data.create_schools_ref()
 #print(data.return_data(data.find_name_match('Stanford University')))
 
 def split_df(path):
