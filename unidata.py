@@ -18,7 +18,6 @@ class UniversityData:
                 self.map_data[name] = [school['LATITUDE'], school['LONGITUDE']]
                 self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
                 self.schools[name] = self.apply_filters(school, ref.value_filters, ref.key_filters)
-            self.create_schools_ref()
             return
 
         # process file
@@ -45,6 +44,7 @@ class UniversityData:
                 del instance['COSTT4_P']
 
             self.schools[instance['INSTNM']] = instance
+            self.create_schools_ref()
 
         #print(len(self.schools.keys()))
         with open('data.json', 'w') as f:
