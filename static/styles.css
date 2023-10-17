@@ -25,18 +25,17 @@ input::-webkit-inner-spin-button {
 
 /* ----------------------- navigation bars ----------------------- */
 .nav-bar {
-    align-items: center;
     margin: 0;
     padding: 10px 0;
     background-color: var(--white);
     width: 100%;
     max-height: 48px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
 #buttons {
-    display: inline;
     width: fit-content;
     height: fit-content;
 }
@@ -73,6 +72,10 @@ input::-webkit-inner-spin-button {
     font-weight: bold;
     font-size: 1.25em;
     margin-left: 20px;
+}
+
+.icon {
+    display: none;
 }
 
 /* ----------------------- homepage ----------------------- */
@@ -334,6 +337,7 @@ html {
 
 body, header, html {
     margin: 0;
+    width: 100vw;
 }
 
 .title {
@@ -346,15 +350,32 @@ body, header, html {
     body {
         padding-bottom: 0;
     }
-    
-    .nav-bar {
-        display: flex;
-        justify-content: space-evenly;
+
+    .nav-bar button, #buttons form, .icon i {
+        font-size: 1em;
     }
 
-    .nav-bar button, #buttons form {
-        font-size: 0.8em;
-        padding: 5px;
+    #buttons {
+        width: 100%;
+        display: none;
+    }
+
+    #buttons form {
+        display: block;
+        background: var(--accent);
+        margin: 0;
+        padding: 10px 0;
+    }
+
+    #buttons form > button {
+        color: var(--white);
+    }
+
+    .nav-bar {
+        max-height: fit-content;
+        display: block;
+        position: relative;
+        padding: 0px;
     }
 
     #buttons form:last-of-type {
@@ -362,8 +383,22 @@ body, header, html {
     }
 
     #logo button {
+        margin-top: 10px;
+        margin-bottom: 10px;
         margin-left: 0;
         font-size: 1em;
+        width: fit-content;
+    }
+
+    .icon {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+    }
+
+    .icon i {
+        color: var(--accent);
     }
 
     .title {

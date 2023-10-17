@@ -7,12 +7,18 @@
 
     <!--<link rel="stylesheet" href="styles.css">-->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <header>
     <div class="nav-bar">
         <form id="logo" action="{{ url_for('home') }}" method="post">
             <button type="submit">University Database</button>
         </form>
+
+        <a href="javascript:void(0);" class="icon" onclick="mobileNavbar()">
+            <i class="fa fa-bars"></i>
+        </a>
+
         <div id="buttons">
             <form action="{{ url_for('database') }}" method="post">
                 <button type="submit">Database</button>
@@ -23,6 +29,8 @@
             <form id="current-page" action="{{ url_for('map') }}" method="post">
                 <button type="submit">Map</button>
             </form>
+        </div>
+        <script src="{{ url_for('static', filename='navbar.js') }}"></script>
     </div>
 </header>
 <body id="gradient">
