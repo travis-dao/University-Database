@@ -1,110 +1,85 @@
 import pandas as pd
-import numpy as np
-from reference import Reference
 from thefuzz import fuzz
 import json
+import reference as ref;
 
-SETUP = True
+SCHOOL_YEAR_START = 21
+FILE_NAME = f'MERGED20{SCHOOL_YEAR_START}_{SCHOOL_YEAR_START + 1}_PP'
 
 class UniversityData:
     def __init__(self):
-        ref = Reference()
+        self.school_names = []
+        with open(f'files/school_names.json', 'r') as file:
+            self.school_names = json.load(file)['names']
+
         self.schools = {}
-        self.map_data = {}
-        if SETUP:
-            with open('data.json') as f:
-                self.schools = json.load(f)
-            for name, school in self.schools.items():
-                self.map_data[name] = [school['LATITUDE'], school['LONGITUDE']]
-                self.map_data = {k: v for k, v in self.map_data.items() if v != ['n/a', 'n/a']}
-                self.schools[name] = self.apply_filters(school, ref.value_filters, ref.key_filters)
-            return
+        with open(f'files/{FILE_NAME}.json', 'r') as file:
+            self.schools = json.load(file)
+        return
 
-        # process file
-        df_1 = pd.read_csv('files/file_0.csv', dtype='str')
-        df_2 = pd.read_csv('files/file_1.csv', dtype='str')
-        df = pd.concat([df_1, df_2])
-        df = df.filter(ref.all_dict_headers)
+    # processes the file and stores only the important parts
+    def process_file(self):
+        df = pd.read_csv(f'files/{FILE_NAME}.csv', dtype='str') # reads in file
         df.fillna('n/a', inplace=True) # replace NULL with 'n/a'
-        unfiltered_data = df.to_dict(orient='list') # dict[list]
+
+        filtered_data = {} # school name : {header: value, etc}
+        unfiltered_data = df.to_dict(orient='list') # dict --> key : column name, value : column values
+        headers = ref.dict_headers # get all headers
         length = len(unfiltered_data['INSTNM'])
-        #print(length)
 
-        self.states_count_dict = ref.states_count_dict
-        for index in range(length):
-            instance = self.return_data_instance(unfiltered_data, index, ref.all_dict_headers)
+        for i in range(length):
+            unfiltered_values = {}
+            filtered_values = {}
 
-            if instance['NPT4_PUB'] == 'n/a':
-                instance = {k: v for k, v in instance.items() if 'PUB' not in k}
+            for header in range(len(headers)):
+                unfiltered_values[headers[header]] = unfiltered_data[headers[header]][i]
+
+            url = unfiltered_values['INSTURL']
+            if url.startswith('www.'):
+                unfiltered_values['INSTURL'] = 'https://' + url
+
+            if unfiltered_values['NPT4_PUB'] == 'n/a':
+                unfiltered_values = {k: v for k, v in unfiltered_values.items() if 'PUB' not in k}
             else:
-                instance = {k: v for k, v in instance.items() if 'PRIV' not in k}
-            if instance['COSTT4_A'] == 'n/a':
-                del instance['COSTT4_A']
+                unfiltered_values = {k: v for k, v in unfiltered_values.items() if 'PRIV' not in k}
+            if unfiltered_values['COSTT4_A'] == 'n/a':
+                del unfiltered_values['COSTT4_A']
             else:
-                del instance['COSTT4_P']
+                del unfiltered_values['COSTT4_P']
 
-            self.schools[instance['INSTNM']] = instance
-            self.create_schools_ref()
+            for key, value in unfiltered_values.items():
+                try:
+                    filtered_values[ref.key_filter[key]] = value
+                except:
+                    filtered_values[key] = value
 
-        #print(len(self.schools.keys()))
-        with open('data.json', 'w') as f:
-            json.dump(self.schools, f)
+            filtered_data[unfiltered_data['INSTNM'][i]] = filtered_values
 
-    def return_data(self, name_input):
-        return self.schools[name_input]
+        with open(f'files/{FILE_NAME}.json', 'w') as file:
+            json.dump(filtered_data, file)
+        return
     
-    def return_map_data(self):
-        return self.map_data
-
-    def find_name_match(self, name_input):
-        # returns the closest name match
+    # returns the closest school name match
+    def get_name_match(self, name_input):
         name_to_return = ''
         stored_similarity_value = 0
-        for keys in self.schools.keys():
-            similarity_value = fuzz.token_sort_ratio(name_input, keys)
+        for name in self.school_names:
+            similarity_value = fuzz.token_sort_ratio(name_input, name)
             if (similarity_value > stored_similarity_value):
                 stored_similarity_value = similarity_value
-                name_to_return = keys
+                name_to_return = name
         return name_to_return
     
-    def return_data_instance(self, unfiltered_data, index, necessary_headers):
-        data = {}
-        for header in necessary_headers:
-            data[header] = unfiltered_data[header][index]
-        url = data['INSTURL']
-        if url.startswith('www.'):
-            data['INSTURL'] = 'https://' + url
+    def process_school_data(self, data):
+        try:
+            for filter_name, filter_dict in ref.value_filter.items():
+                data[filter_name] = filter_dict[data[filter_name]]
+        except:
+            return data
         return data
 
-    def apply_filters(self, data, value_filters, key_filters):
-        filter_names = list(value_filters.keys())
-        for name in filter_names:
-            try:
-                data[name] = value_filters[name][data[name]]
-            except:
-                data[name] = 'n/a'    
-        # filter keys
-        data = {key_filters[k]: v for k, v in data.items()}
-        return data
-    
-    def create_schools_ref(self):
-        with open('reference.json', 'w') as f:
-            d = {}
-            d['names'] = list(self.schools.keys())
-            json.dump(d, f)
-    
-    def return_schools_ref(self):
-        with open('reference.json') as f:
-            return json.load(f)
-    
-#data = UniversityData()
-#data.create_schools_ref()
-#print(data.return_data(data.find_name_match('Stanford University')))
+    def get_school_data(self, name_input):
+        return self.process_school_data(self.schools[name_input])
 
-def split_df(path):
-    df = pd.read_csv(path, dtype='str')
-    df_split = np.array_split(df, 2)
-
-    for i, chunk in enumerate(df_split):
-        chunk.to_csv(f'file_{i}.csv', index=False)
-#split_df('files/MERGED2021_22_PP.csv')
+'''ud = UniversityData()
+ud.process_file()'''

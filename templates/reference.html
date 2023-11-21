@@ -1,42 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>University Database</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link rel="stylesheet" href="styles.css">-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>University Database</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<header>
-    <div class="nav-bar">
-        <form id="logo" action="{{ url_for('home') }}" method="post">
-            <button type="submit">University Database</button>
-        </form>
-
-        <a href="javascript:void(0);" class="icon" onclick="mobileNavbar()">
-            <i class="fa fa-bars"></i>
-        </a>
-
-        <div id="buttons">
-            <form action="{{ url_for('database') }}" method="post">
-                <button type="submit">Database</button>
-            </form>
-            <form id="current-page" action="{{ url_for('reference') }}" method="post">
-                <button type="submit">Reference</button>
-            </form>
-            <form action="{{ url_for('map') }}" method="post">
-                <button type="submit">Map</button>
-            </form>
+<body>
+    <header>
+        <div class="nav-bar">
+            <a href="{{ url_for('index') }}" class="text-accent">Code by Travis Dao</a>
+            <a id="menu" data-state="off" onclick="sidebar()"><i class="fa fa-xmark text-accent"></i></a>
         </div>
-        <script src="{{ url_for('static', filename='navbar.js') }}"></script>
+    </header>
+    <div id="side-bar" class="side-bar">
+        <div class="side-bar-wrapper">
+            <a href="{{ url_for('search') }}" class="text-primary button button-underline">Search</a>
+            <a href="{{ url_for('reference') }}" class="text-primary button button-underline">Reference</a>
+        </div>
     </div>
-</header>
-<body id="gradient">
-    <h1 class="title">Reference</h1>
-    <div class="display">
-        <p id="reference"></p>
+    <div class="container container-40vw reference">
+        <h1 class="text-accent">Reference</h1>
+        <div class="container-flex-column">
+            <div>
+                <h2 class="text-accent">School Name</h2>
+                <p class="text-secondary">The name of the univerisity of college. 
+                    There might be variations at the end due to multiple campuses.
+                </p>
+            </div>
+            <div>
+                <h2 class="text-accent">Admissions Rate</h2>
+                <p class="text-secondary">The percentage of students admitted out of all applicants</p>
+            </div>
+            <div>
+                <h2 class="text-accent">Location</h2>
+                <p class="text-secondary">Location of the school. It goes "City, State (Geographic Region)".</p>
+            </div>
+            <div>
+                <h2 class="text-accent">Local Population Size</h2>
+                <p class="text-secondary">Population size of the local area.</p>
+            </div>
+            <div>
+                <h2 class="text-accent">Carnegie Classification - Basic</h2>
+                <p class="text-secondary">Following the "Carnegie Commision on Higher Education" framework, this describes what type of university it is. 
+                    Example: Doctoral Universities: Very High Research Activity.
+                     More specifically, the focus and level of education. For more information, click <a href="https://carnegieclassifications.acenet.edu/carnegie-classification/classification-methodology/basic-classification/" target="_blank" class="text-accent link">this</a>.
+                    </p>
+            </div>
+            <div>
+                <h2 class="text-accent">Carnegie Classification - Size</h2>
+                <p class="text-secondary">Following the "Carnegie Commision on Higher Education" framework, this includes the enrollment period and residential character. 
+                    Example: Four-year, large, highly residential.
+                    For more information, click <a href="https://carnegieclassifications.acenet.edu/carnegie-classification/classification-methodology/size-setting-classification/" target="_blank" class="text-accent link">this</a>.
+                </p>
+            </div>
+            <div>
+                <h2 class="text-accent">Religious Affiliation</h2>
+                <p class="text-secondary">If the university is religious. If not, then "n/a" is written instead.</p>
+            </div>
+            <div>
+                <h2 class="text-accent">Undergrad Size</h2>
+                <p class="text-secondary">How many undergraduate students there are.</p>
+            </div>
+            <div>
+                <h2 class="text-accent">Program Distribution</h2>
+                <p class="text-secondary">The spread of chosen education programs. 
+                    These are more general so multiple majors can be included per grouping.
+                </p>
+            </div>
+            <div>
+                <h2 class="text-accent">Ethnic Distribution</h2>
+                <p class="text-secondary">Ethnic diveristy. (Affirmative Action?)</p>
+            </div>
+            <div>
+                <h2 class="text-accent">SAT / ACT</h2>
+                <p class="text-secondary">Standardized test scores at the 25th, 50th, and 75th percentile. 
+                    Note that in recent years, test submissions are optional so results are not 100% representative. 
+                    If test scores are not given by schools, then "n/a" is written instead.
+                </p>
+            </div>
+            <div>
+                <h2 class="text-accent">Federal Loan</h2>
+                <p class="text-secondary">How many students took out a federal student loan.
+
+                </p>
+            </div>
+            <div>
+                <h2 class="text-accent">Tuition Cost</h2>
+                <p class="text-secondary">Tuition costs for in-state and out-of-state students. 
+                    Public schools tend to have different prices while privates school tend to have the same prices.
+                </p>
+            </div>
+            <div>
+                <h2 class="text-accent">Average Attendance Cost & Costs Per Income Range</h2>
+                <p class="text-secondary">The average price a student will pay. 
+                    This includes tuition & fees, textbooks & supplies, living expenses; minus grant/scholarship aid. 
+                    Calculated per income group. 
+                    Negative numbers means no fees — could be full-ride scholarship and more.
+                </p>
+            </div>
+            <h2 class="text-accent">Miscellaneous Costs</h2>
+            <p class="text-secondary">Fees other than tuition. Includes: residence, supplies.</p>
+        </div>
     </div>
-    <script src="{{ url_for('static', filename='reference.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='navbar.js') }}"></script>
 </body>
 </html>

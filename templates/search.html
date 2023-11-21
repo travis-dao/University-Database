@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Database</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="restrict">
+    <header>
+        <div class="nav-bar">
+            <a href="{{ url_for('index') }}" class="text-accent">Code by Travis Dao</a>
+            <a id="menu" data-state="off" onclick="sidebar()"><i class="fa fa-xmark text-accent"></i></a>
+        </div>
+    </header>
+    <div id="side-bar" class="side-bar">
+        <div class="side-bar-wrapper">
+            <a href="{{ url_for('search') }}" class="text-primary button button-underline">Search</a>
+            <a href="{{ url_for('reference') }}" class="text-primary button button-underline">Reference</a>
+        </div>
+    </div>
+    <div class="container container-40vw">
+        <h1 class="text-accent">Search for a School</h1>
+        <form method="POST" action="{{ url_for('display') }}">
+            <div class="searchbar">
+                <input name="input" id="input" type="text" placeholder="Enter the full name of a school" autocomplete="off" required>
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+        <p class="text-small text-secondary">
+            I recommend  inputing the full name of the university to get the most accurate results. Some schools have multiple campus or a long full name. For all school names and an explanation of each item description, click this
+            <a href="{{ url_for('reference') }}" class="text-accent text-small link">cheetsheet.</a>
+        </p>
+    </div>
+
+    <script src="{{ url_for('static', filename='navbar.js') }}"></script>
+</body>
+</html>

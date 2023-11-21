@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Database</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Chart JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.0/chart.umd.js"></script>
+    <script src="https://unpkg.com/chart.js@4.2.0/dist/chart.umd.js"></script>
+</head>
+<body class="display restrict">
+    <header>
+        <div class="nav-bar">
+            <a href="{{ url_for('index') }}" class="text-accent">Code by Travis Dao</a>
+            <a id="menu" data-state="off" onclick="sidebar()"><i class="fa fa-xmark text-accent"></i></a>
+        </div>
+    </header>
+    <div id="side-bar" class="side-bar">
+        <div class="side-bar-wrapper">
+            <a href="{{ url_for('search') }}" class="text-primary button button-underline">Search</a>
+            <a href="{{ url_for('reference') }}" class="text-primary button button-underline">Reference</a>
+        </div>
+    </div>
+    <div class="scroll-icon text-secondary">
+        <i class="fa fa-chevron-up up"></i>
+        <br>
+        <i class="fa fa-chevron-down down"></i>
+    </div>
+    <div class="container carousel">
+        <section class="section">
+            <a id="INSTURL" href="" target="_blank"><h1 id="INSTNM" class="text-accent">Testing a Very Very Very Long School Name To See if It Fits</h1></a>
+            <p id="ADM_RATE" class="text-secondary">Admission Rate: XX.XX%</p>
+        </section>
+        <section class="section">
+            <h1 class="text-secondary">Basic Info</h1>
+            <div class="basic-info">
+                <div>
+                    <h3 class="text-secondary">Location</h3>
+                    <p id="LOCATION" class="text-accent">Value</p>
+                </div>
+                <div class="line"></div>
+                <div>
+                    <h3 class="text-secondary">Local Population Size</h3>
+                    <p id="LOCALE" class="text-accent">Value</p>
+                </div>
+                <div class="line"></div>
+                <div>
+                    <h3 class="text-secondary">Carnegie Classification - Basic</h3>
+                    <p id="CCBASIC" class="text-accent">Value</p>
+                </div>
+                <div class="line"></div>
+                <div>
+                    <h3 class="text-secondary">Carnegie Classification - Size</h3>
+                    <p id="CCSIZSET" class="text-accent">Value</p>
+                </div>
+                <div class="line"></div>
+                <div>
+                    <h3 class="text-secondary">Religious Affiliation</h3>
+                    <p id="RELAFFIL" class="text-accent">Value</p>
+                </div>
+                <div class="line"></div>
+                <div>
+                    <h3 class="text-secondary">Undergrad Size</h3>
+                    <p id="UGDS" class="text-accent">Value</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="chart-container">
+                <canvas id="chart-program-distribution"></canvas>
+            </div>
+        </section>
+        <section class="section">
+            <div class="chart-container">
+                <canvas id="chart-ethnic-distribution"></canvas>
+            </div>
+        </section>
+        <section class="section test-scores-wrapper" class="test-scores-wrapper">
+            <div class="test-scores">
+                <h1 class="text-secondary">SAT</h1>
+                <div class="container-flex-row">
+                    <div class="test-scores-attribute">
+                        <p class="text-secondary">Reading (25th Percentile)</p>
+                        <p class="text-secondary">Reading (50th Percentile)</p>
+                        <p class="text-secondary">Reading (75th Percentile)</p>
+                        <p class="text-secondary">Math (25th Percentile)</p>
+                        <p class="text-secondary">Math (50th Percentile)</p>
+                        <p class="text-secondary">Math (75th Percentile)</p>
+                        <p class="text-secondary">Writing (25th Percentile)</p>
+                        <p class="text-secondary">Writing (50th Percentile)</p>
+                        <p class="text-secondary">Writing (50th Percentile)</p>
+                        <p class="text-secondary">Average (25th Percentile)</p>
+                        <p class="text-secondary">Average (50th Percentile)</p>
+                        <p class="text-secondary">Average (75th Percentile)</p>
+                    </div>
+                    <div class="test-scores-value">
+                        <p id="SATVR25" class="text-accent">1600</p>
+                        <p id="SATVRMID" class="text-accent">1600</p>
+                        <p id="SATVR75" class="text-accent">1600</p>
+                        <p id="SATMT25" class="text-accent">1600</p>
+                        <p id="SATMTMID" class="text-accent">1600</p>
+                        <p id="SATMT75" class="text-accent">1600</p>
+                        <p id="SATWR25" class="text-accent">1600</p>
+                        <p id="SATWRMID" class="text-accent">1600</p>
+                        <p id="SATWR75" class="text-accent">1600</p>
+                        <p class="text-accent">n/a</p>
+                        <p id="SAT_AVG" class="text-accent">1600</p>
+                        <p class="text-accent">n/a</p>
+                    </div>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="test-scores">
+                <h1 class="text-secondary">ACT</h1>
+                <div class="container-flex-row">
+                    <div class="test-scores-attribute">
+                        <p class="text-secondary">Reading (25th Percentile)</p>
+                        <p class="text-secondary">Reading (50th Percentile)</p>
+                        <p class="text-secondary">Reading (75th Percentile)</p>
+                        <p class="text-secondary">Math (25th Percentile)</p>
+                        <p class="text-secondary">Math (50th Percentile)</p>
+                        <p class="text-secondary">Math (75th Percentile)</p>
+                        <p class="text-secondary">Writing (25th Percentile)</p>
+                        <p class="text-secondary">Writing (50th Percentile)</p>
+                        <p class="text-secondary">Writing (50th Percentile)</p>
+                        <p class="text-secondary">Average (25th Percentile)</p>
+                        <p class="text-secondary">Average (50th Percentile)</p>
+                        <p class="text-secondary">Average (75th Percentile)</p>
+                    </div>
+                    <div class="test-scores-value">
+                        <p id="ACTEN25" class="text-accent">1600</p>
+                        <p id="ACTENMID" class="text-accent">1600</p>
+                        <p id="ACTEN75" class="text-accent">1600</p>
+                        <p id="ACTMT25" class="text-accent">1600</p>
+                        <p id="ACTMTMID" class="text-accent">1600</p>
+                        <p id="ACTMT75" class="text-accent">1600</p>
+                        <p id="ACTWR25" class="text-accent">1600</p>
+                        <p id="ACTWRMID" class="text-accent">1600</p>
+                        <p id="ACTWR75" class="text-accent">1600</p>
+                        <p id="ACTCM25" class="text-accent">1600</p>
+                        <p id="ACTCMMID" class="text-accent">1600</p>
+                        <p id="ACTCM75" class="text-accent">1600</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section costs">
+            <div>
+                <div>
+                    <h3 class="text-secondary">Federal Loan</h3>
+                    <p id="PCTFLOAN" class="text-accent">XX.XX%</p>
+                </div>
+            </div>
+            <div class="container-flex-row">
+                <div>
+                    <h3 class="text-secondary">Tuition Cost (in/out-of-state)</h3>
+                    <p id="TUITIONFEE" class="text-accent">$XX,XXX / $XX,XXX</p>
+                </div>
+                <div>
+                    <h3 class="text-secondary">Average Attendance Cost</h3>
+                    <p id="COSTT4" class="text-accent">$XX,XXX</p>
+                </div>
+            </div>
+            <div class="container-flex-row">
+                <div>
+                    <h3 class="text-secondary">Costs Per Income Range</h3>
+                    <div>
+                        <p class="text-secondary">Average</p>
+                        <p id="NPT4" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">$0-$30,000</p>
+                        <p id="NPT41" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">$0-$48,000</p>
+                        <p id="NPT4_048" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">$30,001-$48,000</p>
+                        <p id="NPT42" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">$30,001-$75,000</p>
+                        <p id="NPT4_3075" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">$48,001-$75,000</p>
+                        <p id="NPT43" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">$75,001-$110,000</p>
+                        <p id="NPT44" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">$75,000+</p>
+                        <p id="NPT4_75UP" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">$110,000+</p>
+                        <p id="NPT45" class="text-accent">$XX,XXX</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-secondary">Miscellaneous Costs</h3>
+                    <div>
+                        <p class="text-secondary">Books & Supplies</p>
+                        <p id="BOOKSUPPLY" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">On-Campus - Room and Board</p>
+                        <p id="ROOMBOARD_ON" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">On-Campus - Other Expenses</p>
+                        <p id="OTHEREXPENSE_ON" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">Off-Campus - Room and Board</p>
+                        <p id="ROOMBOARD_OFF" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">Off-Campus - Other Expenses</p>
+                        <p id="OTHEREXPENSE_OFF" class="text-accent">$XX,XXX</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary">With-Family - Other Expenses</p>
+                        <p id="OTHEREXPENSE_FAM" class="text-accent">$XX,XXX</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='carousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='navbar.js') }}"></script>
+    <script>
+        let data = {{ flask_data|tojson }}.data
+    </script>
+    <script src="{{ url_for('static', filename='display.js') }}"></script>
+</body>
+</html>

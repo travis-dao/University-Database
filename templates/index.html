@@ -1,46 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>University Database</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link rel="stylesheet" href="styles.css">-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>University Database</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<header>
-    <div class="nav-bar">
-        <form id="logo" action="{{ url_for('home') }}" method="post">
-            <button type="submit">University Database</button>
-        </form>
-
-        <a href="javascript:void(0);" class="icon" onclick="mobileNavbar()">
-            <i class="fa fa-bars"></i>
-        </a>
-
-        <div id="buttons">
-            <form action="{{ url_for('database') }}" method="post">
-                <button type="submit">Database</button>
-            </form>
-            <form action="{{ url_for('reference') }}" method="post">
-                <button type="submit">Reference</button>
-            </form>
-            <form action="{{ url_for('map') }}" method="post">
-                <button type="submit">Map</button>
-            </form>
+<body class="restrict">
+    <header>
+        <div class="nav-bar">
+            <a href="{{ url_for('index') }}" class="text-accent">Code by Travis Dao</a>
+            <a id="menu" data-state="off" onclick="sidebar()"><i class="fa fa-xmark text-accent"></i></a>
         </div>
-        <script src="{{ url_for('static', filename='navbar.js') }}"></script>
+    </header>
+    <div id="side-bar" class="side-bar">
+        <div class="side-bar-wrapper">
+            <a href="{{ url_for('search') }}" class="text-primary button button-underline">Search</a>
+            <a href="{{ url_for('reference') }}" class="text-primary button button-underline">Reference</a>
+        </div>
     </div>
+    <div class="container container-40vw">
+        <h1 class="text-accent">University Database</h1>
+        <p class="text-secondary">A dynamic and interactive platform designed to enhance your academic experience. Easy access to a wealth of information and resources. The user-friendly interface simplifies navigation. All reliable data from the government.</p>
+        <a href="{{ url_for('search') }}" class="button button-fill text-secondary">Search School</a>
+    </div>
+
     <script src="{{ url_for('static', filename='navbar.js') }}"></script>
-</header>
-<body>
-    <div id="gradient">
-        <h1 class="title" id="home">University Database</h1>
-        <div id="about">
-            <h1>About This Project</h1>
-            <p>College is something all students at some point in their lives worry about. This project database contains over 6,000 schools. Relevent information include test scores, admissions rates, program distribution, and costs. All the data is parsed from the <a href="https://collegescorecard.ed.gov/data/" target="_blank">government database.</a> The entire project repository is on my <a href="https://github.com/travis-dao/University-Database" target="_blank">GitHub</a>. If you have any feedback, send it through this <a href="https://forms.gle/rJMirhFS9WJsaffr5" target="_blank">Google form</a>.</p>
-            <p id="signature">Travis Dao</p>
-        </div>
-    </div>
 </body>
 </html>
