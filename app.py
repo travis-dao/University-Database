@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from unidata import UniversityData
 
 HOME = 'index.html'

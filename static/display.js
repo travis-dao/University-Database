@@ -37,7 +37,8 @@ function display_data_normal(data) {
 
 // for values like pricing and %'s
 function display_data_special(data) {
-    document.getElementById('ADM_RATE').innerHTML = 'Admissions Rate: ' + (data['ADM_RATE'] * 100) + '%'
+    const admRate = Math.round(data['ADM_RATE'] * 100 * 100) / 100
+    document.getElementById('ADM_RATE').innerHTML = 'Admissions Rate: ' + (admRate) + '%'
     document.getElementById('PCTFLOAN').innerHTML = (data['PCTFLOAN'] * 100) + '%'
     document.getElementById('TUITIONFEE').innerHTML = `${data['TUITIONFEE_IN']} / ${data['TUITIONFEE_OUT']}`
     document.getElementById('INSTURL').href = `${data['INSTURL']}`
