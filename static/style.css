@@ -40,20 +40,21 @@ html {
 
 /* Nav */
 header {
-    position: absolute;
+    position: sticky;
     top: 0;
-    width: 100vw;
+    display: flex;
+    z-index: 10;
 }
 
 .nav-bar {
-    position: relative;
+    position: absolute;
     box-sizing: border-box;
     padding: 4vh 2.5vw;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     height: fit-content;
-    width: 100%;
+    width: 100vw;
     z-index: 3;
 }
 
@@ -68,14 +69,13 @@ a:not(.link){
 }
 
 .side-bar {
-    box-sizing: border-box;
     position: absolute;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: end;
     padding: 4vh 2.5vw;
     right: 0;
-    width: 25vw;
+    width: 100vw;
     height: 100vh;
     background-color: var(--secondary);
     transform: translateX(100%);
@@ -111,15 +111,15 @@ a:not(.link){
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 2rem;
     align-items: end;
+    gap: 2rem;
 }
 
 .side-bar-wrapper a {
     box-sizing: border-box;
     width: fit-content;
     text-align: end;
-    font-size: 2rem;
+    font-size: 5rem;
 }
 
 /* Main */
